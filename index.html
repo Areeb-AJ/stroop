@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stroop Effect Loop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    #word {
+      font-size: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stroop Effect Loop</h1>
+  <div id="word">Ready...</div>
+
+  <script>
+    const colors = ["red", "blue", "green", "yellow","black"];
+    const words = ["RED", "BLUE", "GREEN", "YELLOW", "BLACK"];
+    const wordDiv = document.getElementById("word");
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    function showNext() {
+      const isCongruent = Math.random() < 0.05;
+      const wordIndex = getRandomInt(words.length);
+
+      let colorIndex;
+      if (isCongruent) {
+        colorIndex = wordIndex;
+      } else {
+        do {
+          colorIndex = getRandomInt(colors.length);
+        } while (colorIndex === wordIndex);
+      }
+
+      wordDiv.textContent = words[wordIndex];
+      wordDiv.style.color = colors[colorIndex];
+    }
+
+    // Start changing every 1 second
+    setInterval(showNext, 1000);
+  </script>
+
+</body>
+</html>
